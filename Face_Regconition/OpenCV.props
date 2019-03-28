@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Work\My_Project\Cpp_PetProject\Face_Regconition\header;D:\Work\My_Project\Cpp_PetProject\opencv\opencv_build\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>D:\Work\My_Project\Cpp_PetProject\opencv\opencv_build\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ade.lib;opencv_aruco401d.lib;opencv_bgsegm401d.lib;opencv_bioinspired401d.lib;opencv_calib3d401d.lib;opencv_ccalib401d.lib;opencv_core401d.lib;opencv_datasets401d.lib;opencv_dnn401d.lib;opencv_dnn_objdetect401d.lib;opencv_dpm401d.lib;opencv_face401d.lib;opencv_features2d401d.lib;opencv_flann401d.lib;opencv_fuzzy401d.lib;opencv_gapi401d.lib;opencv_hfs401d.lib;opencv_highgui401d.lib;opencv_imgcodecs401d.lib;opencv_imgproc401d.lib;opencv_img_hash401d.lib;opencv_line_descriptor401d.lib;opencv_ml401d.lib;opencv_objdetect401d.lib;opencv_optflow401d.lib;opencv_phase_unwrapping401d.lib;opencv_photo401d.lib;opencv_plot401d.lib;opencv_quality401d.lib;opencv_reg401d.lib;opencv_rgbd401d.lib;opencv_saliency401d.lib;opencv_shape401d.lib;opencv_stereo401d.lib;opencv_stitching401d.lib;opencv_structured_light401d.lib;opencv_superres401d.lib;opencv_surface_matching401d.lib;opencv_text401d.lib;opencv_tracking401d.lib;opencv_ts401d.lib;opencv_video401d.lib;opencv_videoio401d.lib;opencv_videostab401d.lib;opencv_xfeatures2d401d.lib;opencv_ximgproc401d.lib;opencv_xobjdetect401d.lib;opencv_xphoto401d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>

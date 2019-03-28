@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main_ui_get_file.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header\func_ui_get_file.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{A1A1A58B-3118-467B-BAA2-307062D9C956}</ProjectGuid>
+    <RootNamespace>UIGetFile</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>D:\Program Files\Microsoft SDKs\Windows\v7.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ahadmin.lib;amstrmid.lib;aux_ulib.lib;avrt.lib;bcrypt.lib;bhsupp.lib;bthprops.lib;certadm.lib;certidl.lib;clfsmgmt.lib;clfsw32.lib;corrEngine.lib;credui.lib;cryptui.lib;cryptxml.lib;cscapi.lib;d2d1.lib;d3d10.lib;d3d10_1.lib;d3d11.lib;d3d8thk.lib;d3d9.lib;daouuid.lib;davclnt.lib;dciman32.lib;ddao35.lib;ddao35d.lib;ddao35u.lib;ddao35ud.lib;dhcpcsvc6.lib;dhcpsapi.lib;dinput8.lib;dmoguids.lib;dpx.lib;drt.lib;drtprov.lib;drttransport.lib;dsound.lib;dwmapi.lib;dwrite.lib;dxgi.lib;dxva2.lib;eappcfg.lib;eappprxy.lib;ehstorguids.lib;ElsCore.lib;encapi.lib;esent.lib;evr.lib;evr_vista.lib;fileextd.lib;fontsub.lib;fwpuclnt.lib;fxsutility.lib;GdiPlus.lib;gpmuuid.lib;httpapi.lib;iepmapi.lib;infocardapi.lib;irprops.lib;iscsidsc.lib;ksuser.lib;ktmw32.lib;locationapi.lib;magnification.lib;mbnapi_uuid.lib;Mf.lib;Mfplat.lib;Mfplat_vista.lib;mfplay.lib;mfreadwrite.lib;mfuuid.lib;Mf_vista.lib;msctfmonitor.lib;msdasc.lib;msdelta.lib;msdmo.lib;msdrm.lib;MsPatchC.lib;msxml6.lib;mtxdm.lib;muiload.lib;ncrypt.lib;ndfapi.lib;ndproxystub.lib;newdev.lib;nmapi.lib;normaliz.lib;odbc32.lib;odbcbcp.lib;odbccp32.lib;oledb.lib;osptk.lib;p2p.lib;p2pgraph.lib;parser.lib;PatchWiz.lib;PhotoAcquireUID.lib;PortableDeviceGuids.lib;powrprof.lib;prntvpt.lib;propsys.lib;quartz.lib;qutil.lib;qwave.lib;rstrtmgr.lib;sapi.lib;sas.lib;sbtsv.lib;SearchSDK.lib;sensorsapi.lib;shdocvw.lib;shell32.lib;sisbkup.lib;slc.lib;slcext.lib;slwga.lib;SrClient.lib;strmiids.lib;strsafe.lib;structuredquery.lib;t2embed.lib;taskschd.lib;tbs.lib;tdh.lib;TranscodeImageUID.lib;tspubplugincom.lib;txfw32.lib;UIAutomationCore.lib;unicows.lib;Uxtheme.lib;vds_uuid.lib;virtdisk.lib;vpccominterfaces.lib;vssapi.lib;vss_uuid.lib;vstorinterface.lib;wcmguid.lib;wdsbp.lib;WdsClientApi.lib;wdsmc.lib;wdspxe.lib;wdstptc.lib;WebServices.lib;wecapi.lib;wevtapi.lib;WinBio.lib;windowscodecs.lib;WindowsSideShowGuids.lib;winhttp.lib;winsatapi.lib;wlanapi.lib;wlanui.lib;wmcodecdspuuid.lib;wmdrmsdk.lib;wmiutils.lib;wmvcore.lib;workspaceax.lib;wscapi.lib;wsdapi.lib;wsmsvc.lib;wuguid.lib;Xinput.lib;xmllite.lib;xpsprint.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
