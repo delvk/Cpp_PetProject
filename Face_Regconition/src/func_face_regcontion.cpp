@@ -63,7 +63,7 @@ static Mat norm_0_255(InputArray _src) {
 	return dst;
 }
 
-static void read_csv(const string& filename, vector<Mat>& images, vector<string>& names, vector<int>& labels, char separator = ';') {
+static void read_csv(const string& filename, vector<Mat>& images, vector<int>& labels, char separator = ';') {
 	std::ifstream file(filename.c_str(), ifstream::in);
 	if (!file) {
 		string error_message = "No valid input file was given, please check the given filename.";
@@ -81,7 +81,6 @@ static void read_csv(const string& filename, vector<Mat>& images, vector<string>
 			cvtColor(imread(path,3), gray, COLOR_BGR2GRAY);
 			resize(gray, gray, Size(180, 200));
 			images.push_back(gray);
-			names.push_back(className);
 			labels.push_back(atoi(classlabel.c_str()));
 		}
 	}

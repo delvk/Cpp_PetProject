@@ -1,16 +1,16 @@
 #include "face_regconition.hpp"
 #include "func_face_regcontion.cpp"
+#include <iomanip>
 int main() {
 	string path_training_set = "D:/Work/My_Project/Cpp_PetProject/Data_Preparation/Data_Output/training_set.csv";
 	string output_folder = "output";
 	// These vectors hold the images and corresponding labels.
 	vector<Mat> images;
-	vector<string> names;
 	vector<int> labels;
 	// Read in the data. This can fail if no valid
 	// input filename is given.
 	try {
-		read_csv(path_training_set, images, names, labels);
+		read_csv(path_training_set, images, labels);
 	}
 	catch (const cv::Exception& e) {
 		cerr << "Error opening file \"" << path_training_set << "\". Reason: " << e.msg << endl;
@@ -47,9 +47,16 @@ int main() {
 	}
 
 	/*---TRAINING---*/
-	int what = LBPHFACES;
+	int what = -1;
+	//cout << "012345678901234567890123456789";
+	cout << "____________________________" << endl;
+	cout << "Danh sach giai thuat -------|" << endl;
+	cout << setw(2) << EIGENFACES << ". " << left << setw(24) << "Eigenfaces" << "|" << endl << right;
+	cout << setw(2) << FISHERFACES << ". " << left << setw(24) << "Fisherfaces" << "|" << endl << right;
+	cout << setw(2) << LBPHFACES << ". " << left << setw(24) << "LBPHFaces" << "|" << endl << right;
+	for (int i = 0; i < 28; i++)cout << "_";
 
-	cout << "Ban da chon giai thuat so " << what << endl;
+	cout << "\nBan da chon giai thuat so " << what << endl;
 
 	switch (what)
 	{
