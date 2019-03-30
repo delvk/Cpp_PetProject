@@ -33,9 +33,8 @@ int count_size(const filesystem::path path) {
 	return temp;
 }
 
-void write_csv(const char* input, const char* output) {
+void write_csv(const string &input, const string &output) {
 	int id = -1;
-	string name = "";
 	int size_each_example = 0;
 	int size_train=0,
 		size_test=0,
@@ -68,53 +67,28 @@ void write_csv(const char* input, const char* output) {
 			}
 			id++;
 			train_idx = 0; //reset bien train_idx moi khi qua mot thu muc moi
-			name = entry.path().filename().string();
-			cout << "new: " << id << "; " << name << endl;
-			file_dataset <<id<<";"<<name << endl;
+			string name = entry.path().filename().string();
+			cout << "new: " << id << "; "<< name << endl;
+			file_dataset <<id<<";"<< name<< endl;
 		}
 		else 
 		{ 
 			s_path = filesystem::absolute(entry).string();
 			findAndReplaceAll(s_path, "\\", "/"); //chuan hoa path
 			if (train_idx < size_train) { //nho hon so phai training thi ghi vao file training
-				cout << "training: " << s_path << ";" << name << ";" << id << endl;
-				file_train << s_path << ";" << name << ";" << id << endl;
+				cout << "training: " << s_path << ";" << ";" << id << endl;
+				file_train << s_path << ";" << ";" << id << endl;
 
 			}
 			else { //nguoc lai thi ghi testing
-				cout << "testing: " << s_path << ";" << name << ";" << id << endl;
-				file_test << s_path << ";" << name << ";" << id << endl;
+				cout << "testing: " << s_path << ";" << ";" << id << endl;
+				file_test << s_path << ";" <<  ";" << id << endl;
 			}
 			train_idx++;
 		}
 	}
 	file_train.close();
 	file_test.close();
-}
-void write_train(ofstream *outfile, const string path) {
-	for (const auto & entry : filesystem::directory_iterator(path)) {
-		if (filesystem::is_directory(entry.path())) {
-			write_train(outfile, entry.path().string());
-		}
-		else {
-			////outfile << entry.path() << endl;
-			*outfile << entry.path().string() << ";" << entry.path().parent_path().filename().string() << endl;
-		}
-	}
-}
-void write_csv() {
-	//write training_set.csv
-	ofstream outfile;
-	string path = output_folder + "/training_set.csv";
-	outfile.open(path);
-	write_train(&outfile, train_folder);
-	outfile.close();
-
-	//write testing_set.csv
-	path = output_folder + "/testing_set.csv";
-	outfile.open(path);
-	write_train(&outfile, test_folder);
-	outfile.close();
 }
 void testing() {
 	for (auto& p : filesystem::recursive_directory_iterator(data_input_path.c_str()))
@@ -123,13 +97,14 @@ void testing() {
 
 int main(int argc, const char *argv[]) {
 	//Initial Variable for argument
-	string input_database_path = "database";
+	string input_database_path = "database/faces94/female";
 	string output_folder_path = "Data_Output";
 	// Check for valid command line arguments, print usage
 	// if no arguments were given.
 	//message
 	cout << "usage: " << argv[0] << endl;
 	cout << "<input_database_path> <output_folder_path>" << endl;
+	cout << "\n----------------------------------------------------------\n" << endl;
 	if (argc == 1) {
 		cout << "No other arguments other than default application name, using default value (Y/N)?" << endl;
 	}
@@ -177,7 +152,7 @@ int main(int argc, const char *argv[]) {
 		cout << "Can't create folder Output, maybe it already exist" << endl;
 	}
 	//start writing - Prepare data
-	write_csv(argv[2], argv[3]);
+	write_csv(input_database_path, output_folder_path);
 	cout << "Done, make sure to check 3 files exist in " << output_folder << endl;
 	system("pause");
 	return 0;
