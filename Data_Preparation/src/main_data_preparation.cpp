@@ -61,8 +61,8 @@ void write_csv(const char* input, const char* output) {
 				//mac dinh tinh size tu thu muc dau tien no tim dc
 				size_each_example = count_size(entry.path());
 				//chia so training va test
-				size_train = size_each_example * 0.8;
-				size_test = size_each_example * 0.2;
+				size_train = (int)size_each_example * 0.8;
+				size_test = (int) size_each_example * 0.2;
 				cout << "size train: " << size_train << endl;
 				cout << "size test: " << size_test << endl;
 			}
@@ -120,40 +120,65 @@ void testing() {
 	for (auto& p : filesystem::recursive_directory_iterator(data_input_path.c_str()))
 		std::cout << p.path() << '\n';
 }
+
 int main(int argc, const char *argv[]) {
+	//Initial Variable for argument
+	string input_database_path = "database";
+	string output_folder_path = "Data_Output";
 	// Check for valid command line arguments, print usage
 	// if no arguments were given.
 	//message
 	cout << "usage: " << argv[0] << endl;
-	cout << "option: 2 for training - testing, 3 for training, testing, validation" << endl;
-	cout << "database_path" << endl;
-	if (argc < 2) {
-		argv[1] = "3";
+	cout << "<input_database_path> <output_folder_path>" << endl;
+	if (argc == 1) {
+		cout << "No other arguments other than default application name, using default value (Y/N)?" << endl;
 	}
-	if (argc < 3) {
-		argv[2] = data_input_path.c_str();
-		cout << "No input database path, using default ./database" << endl;
+	else if (argc == 2) {
+		input_database_path = string(argv[1]);
+		cout << "You only input database_path, is this okay (Y/N) ?" << endl;
 	}
-	if (argc < 4) {
-		argv[3] = output_folder.c_str();
-		if (CreateDirectory(output_folder.c_str(), NULL))
-		{
-			cout << "Created folders Output!!!" << endl;
+	else if (argc == 3) {
+		input_database_path = string(argv[1]);
+		output_folder_path = string(argv[2]);
+		cout << "Is this okay (Y/N) ?" << endl;
+	}
+	else exit(1);
+	cout << "- Database_folder_path: " << input_database_path << endl;
+	cout << "- Output_folder_path: " << output_folder_path << endl;
+	//Exist if user want
+	char c[30];
+	int attemp = 5;
+	while (attemp>0) {
+		cin.clear();
+		cin.getline(c, 30);
+		if (strcmp("y",c) == 0 || strcmp("Y", c) == 0 || strcmp("yes", c) == 0 || strcmp("YES", c) == 0) break;
+		else if(strcmp("n", c) == 0 || strcmp("N", c) == 0 || strcmp("NO", c) == 0 || strcmp("no", c) == 0 || strcmp("exit", c) == 0 || strcmp("EXIT", c) == 0){
+			cout << "Thoat chuong trinh" << endl;
+			cin.get();
+			exit(-1);
 		}
-		else
-		{
-			// Failed to create directory.
-			cout << "Can't create folder Output" << endl;
+		else {
+			cout << c << endl;
+			cout << "Vui long nhap lai" << endl;
+			attemp--;
 		}
 	}
+	//Exit after 5 attempt
+	if (attemp == 0) exit(0);
 
-	//start copying - Prepare data
+	//Check folder exist 
+	if (CreateDirectory(output_folder_path.c_str(), NULL))
+	{
+		cout << "Created folders Output " << output_folder_path << " !!!" << endl;
+	}
+	else
+	{
+		// Failed to create directory.
+		cout << "Can't create folder Output, maybe it already exist" << endl;
+	}
+	//start writing - Prepare data
 	write_csv(argv[2], argv[3]);
-
-	//write data to csv file in output directory
-
-	//write_csv();
-
+	cout << "Done, make sure to check 3 files exist in " << output_folder << endl;
 	system("pause");
 	return 0;
 }

@@ -23,6 +23,7 @@
     <ProjectGuid>{5996766A-011E-4C3D-BEE4-AD2AB774A873}</ProjectGuid>
     <RootNamespace>facecutting</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>Face_Cropping</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

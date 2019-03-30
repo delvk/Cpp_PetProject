@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="face_cutting.cpp">
+    <ClCompile Include="src\main_face_cropping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

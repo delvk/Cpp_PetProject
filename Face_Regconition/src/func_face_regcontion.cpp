@@ -2,11 +2,6 @@
  *   See <http://www.opensource.org/licenses/bsd-license>
  */
 #include "../header/face_regconition.hpp"
-
-using namespace cv;
-using namespace cv::face;
-using namespace std;
-
 static bool Use_EigenFaceRecognizer(vector<Mat> &images, vector<int> &labels) {
 	Ptr<EigenFaceRecognizer> model = EigenFaceRecognizer::create();
 	model->train(images, labels);
