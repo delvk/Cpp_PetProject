@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="header\face_regconition.hpp" />
     <ClInclude Include="header\resource.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
