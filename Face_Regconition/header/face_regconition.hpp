@@ -27,4 +27,6 @@ static bool Use_FisherFaceRecognizer(vector<Mat> &images, vector<int> &labels);
 static bool Use_LBPHFaceRecognizer(vector<Mat> &images, vector<int> &labels);
 static Mat norm_0_255(InputArray _src);
 static void read_csv(string& filename, vector<Mat>& images, vector<string>& names, vector<int>& labels, char separator);
+static bool checkUserEnter();
+static bool checkUserEnter(int &attemp_number);
 #endif

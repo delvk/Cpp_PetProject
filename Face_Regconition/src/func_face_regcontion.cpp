@@ -22,7 +22,6 @@ static bool Use_FisherFaceRecognizer(vector<Mat> &images, vector<int> &labels) {
 	fs.open(filename, FileStorage::WRITE | FileStorage::MEMORY);
 	model->save(filename);
 	fs.release();
-	cout << "Luu file "<< filename<< " thanh cmn cong roi" << endl;
 	bool temp = !model.empty();
 	if (temp) model->clear();
 	return temp;
@@ -36,7 +35,6 @@ static bool Use_LBPHFaceRecognizer(vector<Mat> &images, vector<int> &labels) {
 	fs.open(filename, FileStorage::WRITE | FileStorage::MEMORY);
 	model->save(filename);
 	fs.release();
-	cout << "Luu file " << filename << " thanh cmn cong roi" << endl;
 	bool temp = !model.empty();
 	if (temp) model->clear();
 	return temp;
@@ -84,5 +82,27 @@ static void read_csv(const string& filename, vector<Mat>& images, vector<int>& l
 			labels.push_back(atoi(classlabel.c_str()));
 		}
 	}
-	cout << "Reading " << images.size() << " training examples successful" << endl;
+	cout << "\nReading " << images.size() << " examples successful" << endl;
+}
+static bool checkUserEnter() { //default attempt time =5
+	int def = 5;
+	return checkUserEnter(def);
+}
+static bool checkUserEnter(int &attemp_number) {
+	//Exist if user want
+	char c[30];
+	while (attemp_number > 0) {
+		cin.clear();
+		cin.getline(c, 30);
+		if (strcmp("y", c) == 0 || strcmp("Y", c) == 0 || strcmp("yes", c) == 0 || strcmp("YES", c) == 0) return true;
+		else if (strcmp("n", c) == 0 || strcmp("N", c) == 0 || strcmp("NO", c) == 0 || strcmp("no", c) == 0 || strcmp("exit", c) == 0 || strcmp("EXIT", c) == 0) {
+			return false;
+		}
+		else {
+			cout << "Nhap sai, Vui long nhap lai" << endl;
+			attemp_number--;
+		}
+	}
+	//Exit after attempt
+	if (attemp_number == 0) return false;
 }

@@ -1,9 +1,37 @@
 #include "face_regconition.hpp"
 #include "func_face_regcontion.cpp"
 #include <iomanip>
-int main() {
+int main(int argc, const char *argv[]) {
+
+	//initial variables
 	string path_training_set = "D:/Work/My_Project/Cpp_PetProject/Data_Preparation/Data_Output/training_set.csv";
 	string output_folder = "output";
+
+	//Checking arguments
+	cout << "usage: " << argv[0] << endl;
+	cout << "<path_training_set> <output_folder>" << endl;
+	cout << "\n----------------------------------------------------------\n" << endl;
+	if (argc == 1) {
+		cout << "No other arguments other than default application name, using default value (Y/N)?" << endl;
+	}
+	else if (argc == 2) {
+		path_training_set = string(argv[1]);
+		cout << "You only input database_path, is this okay (Y/N) ?" << endl;
+	}
+	else if (argc == 3) {
+		path_training_set = string(argv[1]);
+		output_folder = string(argv[2]);
+		cout << "Is this okay (Y/N) ?" << endl;
+	}
+	else exit(1);
+	cout << "- path_training_set: " << path_training_set << endl;
+	cout << "- output_folder: " << output_folder << endl;
+	if (!checkUserEnter()) {
+		cin.clear();
+		cout << "Thoat chuong trinh, bye !" << endl;
+		cin.get();
+		return 0;
+	}
 	// These vectors hold the images and corresponding labels.
 	vector<Mat> images;
 	vector<int> labels;
@@ -43,37 +71,40 @@ int main() {
 	else
 	{
 		// Failed to create directory.
-		cout << "Can't create folder Output" << endl;
+		cout << "Can't create folder Output, Maybe it already exist" << endl;
 	}
 
 	/*---TRAINING---*/
 	int what = -1;
 	//cout << "012345678901234567890123456789";
 	cout << "____________________________" << endl;
-	cout << "Danh sach giai thuat -------|" << endl;
+	cout << "Danh sach giai thuat:       |" << endl;
 	cout << setw(2) << EIGENFACES << ". " << left << setw(24) << "Eigenfaces" << "|" << endl << right;
 	cout << setw(2) << FISHERFACES << ". " << left << setw(24) << "Fisherfaces" << "|" << endl << right;
 	cout << setw(2) << LBPHFACES << ". " << left << setw(24) << "LBPHFaces" << "|" << endl << right;
 	for (int i = 0; i < 28; i++)cout << "_";
-
+	cout << "\nNhap giai thuat ban muon: ";
+	cin >> what;
 	cout << "\nBan da chon giai thuat so " << what << endl;
-
 	switch (what)
 	{
 		case EIGENFACES:
 		{
+			cout << "Training ....." << endl;
 			if (Use_EigenFaceRecognizer(images, labels)) cout << "Success" << endl;
 			else cout << "Failed" << endl;
 			break;
 		}
 		case FISHERFACES:
 		{
+			cout << "Training ....." << endl;
 			if (Use_FisherFaceRecognizer(images, labels)) cout << "Success" << endl;
 			else cout << "Failed" << endl;
 			break;
 		}
 		case LBPHFACES:
 		{
+			cout << "Training ....." << endl;
 			if (Use_LBPHFaceRecognizer(images, labels)) cout << "Success" << endl;
 			else cout << "Failed" << endl;
 			break;
