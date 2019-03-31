@@ -5,28 +5,8 @@
 #include "opencv2/core/types_c.h"
 #include "face_regconition.hpp"
 #include "func_face_regcontion.hpp"
-static void read_csv(const string& filename, vector<string>& ex) {
-	std::ifstream file(filename.c_str(), ifstream::in);
-	if (!file) {
-		string error_message = "No valid input file was given, please check the given filename.";
-		CV_Error(Error::StsBadArg, error_message);
-	}
-	char separator = ';';
-	string line, id, name;
-	while (getline(file, line)) {
-		stringstream liness(line);
-		getline(liness, id, separator);
-		getline(liness, name, separator);
-		if (!id.empty() && !name.empty()) {
-			int temp = atoi(id.c_str());
-			//cout << id << ": " << name << endl;
-			ex.push_back(name);
-		}
-	}
-}
-
 // Function for Face Detection 
-void detectAndDraw(Mat& img, CascadeClassifier& cascade, CascadeClassifier & nestedCascade, double scale, Ptr<LBPHFaceRecognizer> &model, vector<string> &ex);
+void detectAndDraw(Mat& img, CascadeClassifier& cascade, CascadeClassifier & nestedCascade, double scale, Ptr<FaceRecognizer> &model, string *);
 string cascadeName, nestedCascadeName;
 
 int main(int argc, const char** argv)
@@ -47,8 +27,8 @@ int main(int argc, const char** argv)
 
 	//read model
 	cout << "Reading model" << endl;
-	Ptr<LBPHFaceRecognizer> model = LBPHFaceRecognizer::create();
-	string path = "D:/Work/My_Project/Cpp_PetProject/Face_Regconition/Predict_From_Model/LBPH_face_model.yml";
+	Ptr<FaceRecognizer> model = LBPHFaceRecognizer::create();
+	string path = "D:/Work/My_Project/Cpp_PetProject/Face_Regconition/output/LBPH_face_model.yml";
 	model->read(path);
 	if (model->empty()) {
 		cout << "Model load khong thanh cong " << endl;
@@ -63,6 +43,12 @@ int main(int argc, const char** argv)
 	if (!read_dataset_id(path_dataset, data)) {
 		cout << "There are line(s) couldn't be read correctly" << endl;
 	}
+	/* This help access data quicker*/
+	string *names = new string[data.size()];
+	for (int i = 0; i < data.size(); i++) {
+		names[i] = getName(i, data);
+	}
+
 	// Start Video..1) 0 for WebCam 2) "Path to Video" for a Local Video 
 
 	cout << "Face Detection Started...." << endl;
@@ -77,7 +63,7 @@ int main(int argc, const char** argv)
 			if (frame.empty())
 				break;
 			Mat frame1 = frame.clone();
-			detectAndDraw(frame1, cascade, nestedCascade, scale,model, data);
+			detectAndDraw(frame1, cascade, nestedCascade, scale,model, names);
 			char c = (char)waitKey(10);
 
 			// Press q to exit from window 
@@ -87,14 +73,17 @@ int main(int argc, const char** argv)
 	}
 	else
 		cout << "Could not Open Camera";
+
+	delete[] names;
+	cin.get();
 	return 0;
 }
 
 void detectAndDraw(Mat& img, CascadeClassifier& cascade,
 	CascadeClassifier& nestedCascade,
 	double scale,
-	Ptr<LBPHFaceRecognizer> &model,
-	vector<Data> &data
+	Ptr<FaceRecognizer> &model,
+	string *names
 
 )
 {
@@ -129,7 +118,7 @@ void detectAndDraw(Mat& img, CascadeClassifier& cascade,
 				cvRound((r.y + r.height - 1)*scale)), color, 3, 8, 0);
 
 		//regcontion
-		cout << getName(model->predict(smallImgROI),data) << endl;
+		cout << names[model->predict(smallImgROI)] << endl;
 		if (nestedCascade.empty())
 			continue;
 		smallImgROI = smallImg(r);

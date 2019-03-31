@@ -140,7 +140,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\func_face_regcontion.cpp" />
     <ClCompile Include="src\main_face_regconition.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,8 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\face_regconition.hpp" />
-    <ClInclude Include="header\resource.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="header\func_face_regcontion.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

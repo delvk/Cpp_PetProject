@@ -29,18 +29,12 @@
     <ClCompile Include="src\main_face_regconition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\func_face_regcontion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\face_regconition.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="header\resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="header\func_face_regcontion.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
