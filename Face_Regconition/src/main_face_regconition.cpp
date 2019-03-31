@@ -1,6 +1,5 @@
 #include "face_regconition.hpp"
-#include "func_face_regcontion.cpp"
-#include <iomanip>
+#include "func_face_regcontion.hpp"
 int main(int argc, const char *argv[]) {
 
 	//initial variables

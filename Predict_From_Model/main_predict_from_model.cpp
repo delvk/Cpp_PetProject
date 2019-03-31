@@ -1,10 +1,12 @@
 #include "../Face_Regconition/header/face_regconition.hpp"
-#include "../Face_Regconition/src/func_face_regcontion.cpp"
+#include "../Face_Regconition/header/func_face_regcontion.hpp"
+
+
 
 int main(int argc, const char *argv[]) {
-	int what = LBPHFACES;
+	int what = userChooseAlg();
 	string file_model = "../Face_Regconition/output/";
-	//start reading
+	//start reading model
 	cout << "Reading model..." << endl;
 	Ptr<FaceRecognizer> model;
 	switch (what)
@@ -37,18 +39,19 @@ int main(int argc, const char *argv[]) {
 	model->read(file_model);
 	if (model->empty()) {
 		cout << "Model load khong thanh cong, dung chuong trinh " << endl;
-		system("pause");
+		cin.get();
 		return 0;
 	}
 	cout << "Load model successful" << endl;
+	//set threshold
+	model->setThreshold(1000);
 
 	/* Loading test case */
 	vector<Mat> testSample;
-	vector<string> testName;
 	vector<int> testLabel;
 	try {
 		string fn = "D:/Work/My_Project/Cpp_PetProject/Data_Preparation/Data_Output/testing_set.csv";
-		read_csv(fn, testSample, testName, testLabel);
+		read_csv(fn, testSample, testLabel);
 	}
 	catch (const cv::Exception& e) {
 		cerr << "Error opening file \""  << "\". Reason: " << e.msg << endl;
@@ -61,24 +64,38 @@ int main(int argc, const char *argv[]) {
 		if (testSample[i].size().empty()) cout << "Test Errror: " << testLabel[i] << endl;
 	}
 
+	/*Loading dataset_id*/
+	/*vector<Data> data;
+	string path_dataset = "D:/Work/My_Project/Cpp_PetProject/Data_Preparation/Data_Output/dataset_id.csv";
+	if (!read_dataset_id(path_dataset, data)) {
+		cout << "There are line(s) couldn't be read correctly" << endl;
+	}
+	for (int i = 0; i < 8; i++) {
+		cout << getName(i, data) << endl;
+	}*/
 	// vecto predict
 	vector<int> predicted_label;
 	vector<double> predicted_confidence;
 	string check = "";
 
-	//set threshold
-	model->setThreshold(1000);
 
+	//Predict output
 	for (int i = 0; i < testLabel.size(); i++){
-		int temp1=-1; double temp2=0.0;
-		model->predict(testSample[i],temp1,temp2);
-		predicted_label.push_back(temp1);
-		predicted_confidence.push_back(temp2);
-		vector<int>::iterator it = find(testLabel.begin(), testLabel.end(), predicted_label[i]);
+		int label=-1; double confident=0.0;
+		model->predict(testSample[i], label, confident);
+		predicted_label.push_back(label);
+		predicted_confidence.push_back(confident);
 		if (predicted_label[i] != testLabel[i]) check = "*";
 		else check = "";
 		cout << check << "predict: " << predicted_label[i] << " | " << testLabel[i]<<" -- "<< predicted_confidence[i] << endl;
 	}
+
+	//Destroy mem
+	//data.clear();
+	testSample.clear();
+	testLabel.clear();
+	predicted_label.clear();
+	predicted_confidence.clear();
 	model->clear();
 	system("pause");
 	return 0;

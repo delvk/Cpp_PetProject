@@ -1,7 +1,7 @@
 /*
  *   See <http://www.opensource.org/licenses/bsd-license>
  */
-#include "../header/face_regconition.hpp"
+#include "face_regconition.hpp"
 static bool Use_EigenFaceRecognizer(vector<Mat> &images, vector<int> &labels) {
 	Ptr<EigenFaceRecognizer> model = EigenFaceRecognizer::create();
 	model->train(images, labels);
@@ -105,4 +105,46 @@ static bool checkUserEnter(int &attemp_number) {
 	}
 	//Exit after attempt
 	if (attemp_number == 0) return false;
+}
+static int userChooseAlg() {
+	int what = -1;
+	//cout << "012345678901234567890123456789";
+	cout << "____________________________" << endl;
+	cout << "Danh sach giai thuat:       |" << endl;
+	cout << setw(2) << EIGENFACES << ". " << left << setw(24) << "Eigenfaces" << "|" << endl << right;
+	cout << setw(2) << FISHERFACES << ". " << left << setw(24) << "Fisherfaces" << "|" << endl << right;
+	cout << setw(2) << LBPHFACES << ". " << left << setw(24) << "LBPHFaces" << "|" << endl << right;
+	for (int i = 0; i < 28; i++)cout << "_";
+	cout << "\nNhap giai thuat ban muon: ";
+	cin >> what;
+	cout << "\nBan da chon giai thuat so " << what << endl;
+	return what;
+}
+string &getName(int id, vector<Data> &data) {
+	for (int i = 0; i < data.size(); i++) {
+		if (id == data[i].id) return data[i].name;
+	}
+	string fail = "";
+	return fail;
+}
+bool read_dataset_id(const string &path, vector<Data> &data) {
+	ifstream file(path.c_str(), ifstream::in);
+	if (!file) {
+		string error_message = "No valid input file was given, please check the given filename.";
+		CV_Error(Error::StsBadArg, error_message);
+		return true;
+	}
+	string line, name, id;
+	const char separator = ';';
+	bool check = true;
+	while (getline(file, line)) {
+		stringstream liness(line);
+		getline(liness, id, separator);
+		getline(liness, name, separator);
+		if (!id.empty() && !name.empty()) {
+			data.push_back(Data(atoi(id.c_str()), name));
+		}
+		else check = false;
+	}
+	return check;
 }
