@@ -1,37 +1,80 @@
 // CPP program to detects face in a video 
-
 // Include required header files from OpenCV directory 
 #include "opencv2/objdetect.hpp" 
 #include "opencv2/core/types_c.h"
 #include "face_regconition.hpp"
 #include "func_face_regcontion.hpp"
 // Function for Face Detection 
-void detectAndDraw(Mat& img, CascadeClassifier& cascade, CascadeClassifier & nestedCascade, double scale, Ptr<FaceRecognizer> &model, string *);
+void detectAndDraw(Mat& img, CascadeClassifier& cascade, double scale, Ptr<FaceRecognizer> &model, string *);
 string cascadeName, nestedCascadeName;
 
 int main(int argc, const char** argv)
 {
-	// VideoCapture class for playing video for which faces to be detected 
-	VideoCapture capture;
+	//Initial Variable
+	string frontal_face_detect_path = "D:/Work/My_Project/Cpp_PetProject/opencv/opencv_build/install/include/opencv2/data/haarcascades/haarcascade_frontalface_default.xml";
+
+	string model_face_regconition_path = "D:/Work/My_Project/Cpp_PetProject/Face_Regconition/output/LBPH_face_model.yml";
+
+	VideoCapture capture;// VideoCapture class for playing video for which faces to be detected
 	Mat frame, image;
 
-	// PreDefined trained XML classifiers with facial features 
-	CascadeClassifier cascade, nestedCascade;
+	CascadeClassifier cascade; // PreDefined trained XML classifiers with facial features 
+	// Load classifiers from "opencv/data/haarcascades" directory 
+	cascade.load(frontal_face_detect_path);
+	
 	double scale = 1;
 
-	// Load classifiers from "opencv/data/haarcascades" directory 
-
-
-	// Change path before execution 
-	cascade.load("D:/Work/My_Project/Cpp_PetProject/opencv/opencv_build/install/include/opencv2/data/haarcascades/haarcascade_frontalface_default.xml");
-
+	cout << "usage: " << argv[0] << endl;
+	cout << "<frontal_face_detect_path> <model_face_regconition_path>" << endl;
+	cout << "\n----------------------------------------------------------\n" << endl;
+	if (argc == 1) {
+		cout << "No other arguments other than default application name, using default value (Y/N)?" << endl;
+	}
+	else if (argc == 2) {
+		frontal_face_detect_path = string(argv[1]);
+		cout << "You only input frontal_face_detect_path, is this okay (Y/N) ?" << endl;
+	}
+	else if (argc == 3) {
+		frontal_face_detect_path = string(argv[1]);
+		model_face_regconition_path = string(argv[2]);
+		cout << "Is this okay (Y/N) ?" << endl;
+	}
+	else exit(1);
+	cout << "- PreDefined trained XML classifiers path: " << frontal_face_detect_path << endl;
+	cout << "- Pretrained face regconizer model: " << model_face_regconition_path << endl;
+	if (!checkUserEnter()) {
+		cout << "Well, BYE " << endl;
+		cin.get();
+		return 0;
+	}
+	Ptr<FaceRecognizer> model;
+	int what = userChooseAlg();
+	switch (what)
+	{
+	case EIGENFACES: {
+		model = EigenFaceRecognizer::create();
+		break;
+	}
+	case FISHERFACES: {
+		model = FisherFaceRecognizer::create();
+		break;
+	}
+	case LBPHFACES: {
+		model = LBPHFaceRecognizer::create();
+		break;
+	}
+	default:
+		cout << "I don't know this algorithm, bye" << endl;
+		cin.get();
+		return 0;
+	}
 	//read model
 	cout << "Reading model" << endl;
-	Ptr<FaceRecognizer> model = LBPHFaceRecognizer::create();
-	string path = "D:/Work/My_Project/Cpp_PetProject/Face_Regconition/output/LBPH_face_model.yml";
+	
+	string path = model_face_regconition_path;
 	model->read(path);
 	if (model->empty()) {
-		cout << "Model load khong thanh cong " << endl;
+		cout << "Loading fail" << endl;
 		system("pause");
 		return 0;
 	}
@@ -63,7 +106,7 @@ int main(int argc, const char** argv)
 			if (frame.empty())
 				break;
 			Mat frame1 = frame.clone();
-			detectAndDraw(frame1, cascade, nestedCascade, scale,model, names);
+			detectAndDraw(frame1, cascade, scale,model, names);
 			char c = (char)waitKey(10);
 
 			// Press q to exit from window 
@@ -80,7 +123,6 @@ int main(int argc, const char** argv)
 }
 
 void detectAndDraw(Mat& img, CascadeClassifier& cascade,
-	CascadeClassifier& nestedCascade,
 	double scale,
 	Ptr<FaceRecognizer> &model,
 	string *names
@@ -116,15 +158,9 @@ void detectAndDraw(Mat& img, CascadeClassifier& cascade,
 		rectangle(img, cvPoint(cvRound(r.x*scale), cvRound(r.y*scale)),
 			cvPoint(cvRound((r.x + r.width - 1)*scale),
 				cvRound((r.y + r.height - 1)*scale)), color, 3, 8, 0);
-
-		//regcontion
+		//Print prediction
 		cout << names[model->predict(smallImgROI)] << endl;
-		if (nestedCascade.empty())
-			continue;
-		smallImgROI = smallImg(r);
 	}
-
-	//// Show Processed Image with detected faces 
+	// Show Processed Image with detected faces 
 	imshow("result", img);
-	//cout << "ket qua la: " << ex[id] << endl;
 }
