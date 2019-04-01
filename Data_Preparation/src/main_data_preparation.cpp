@@ -9,8 +9,6 @@ using namespace std;
 string train_folder = "Data_Training";
 string vali_folder = "Data_Validation";
 string test_folder = "Data_Testing";
-string output_folder = "Data_Output";
-string data_input_path = "database/faces94/male";
 void findAndReplaceAll(std::string & data, std::string toSearch, std::string replaceStr)
 {
 	// Get the first occurrence
@@ -90,14 +88,10 @@ void write_csv(const string &input, const string &output) {
 	file_train.close();
 	file_test.close();
 }
-void testing() {
-	for (auto& p : filesystem::recursive_directory_iterator(data_input_path.c_str()))
-		std::cout << p.path() << '\n';
-}
 
 int main(int argc, const char *argv[]) {
 	//Initial Variable for argument
-	string input_database_path = "database/faces94/male";
+	string input_database_path = "database/faces94/female";
 	string output_folder_path = "Data_Output";
 	// Check for valid command line arguments, print usage
 	// if no arguments were given.
@@ -153,7 +147,7 @@ int main(int argc, const char *argv[]) {
 	}
 	//start writing - Prepare data
 	write_csv(input_database_path, output_folder_path);
-	cout << "Done, make sure to check 3 files exist in " << output_folder << endl;
+	cout << "Done, make sure to check 3 files exist in " << output_folder_path << endl;
 	system("pause");
 	return 0;
 }

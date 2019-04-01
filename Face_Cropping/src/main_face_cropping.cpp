@@ -13,7 +13,7 @@ int main(int argc, const char** argv)
 	cascade.load("D:/Work/My_Project/Cpp_PetProject/opencv/opencv_build/install/include/opencv2/data/haarcascades_cuda/haarcascade_frontalface_default.xml");
 	//path for folder contain images
 	string folder_path = "images";
-	string name = "output/quocbao";
+	string name = "output/quangnam";
 	int idx = 0;
 	//CreateFolder
 	if (CreateDirectory(name.c_str(), NULL))

@@ -73,6 +73,7 @@ int main(int argc, const char** argv)
 	
 	string path = model_face_regconition_path;
 	model->read(path);
+	model->setThreshold(30);
 	if (model->empty()) {
 		cout << "Loading fail" << endl;
 		system("pause");
@@ -159,7 +160,9 @@ void detectAndDraw(Mat& img, CascadeClassifier& cascade,
 			cvPoint(cvRound((r.x + r.width - 1)*scale),
 				cvRound((r.y + r.height - 1)*scale)), color, 3, 8, 0);
 		//Print prediction
-		cout << names[model->predict(smallImgROI)] << endl;
+		int z = model->predict(smallImgROI);
+		if (z == -1) cout << "Unknow" << endl;
+		else cout << names[z] << endl;
 	}
 	// Show Processed Image with detected faces 
 	imshow("result", img);
