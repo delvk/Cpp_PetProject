@@ -67,7 +67,7 @@ int main(int argc, const char** argv)
 			cout << "Could not Open Camera";
 	}
 	else {
-		string test_path = "./Test/test1.jpg";
+		string test_path = "D:/Work/My_Project/Cpp_PetProject/Face_Cropping/images/1.jpg";
 		Mat gray=imread(test_path, 3);
 		detectAndDraw(gray, cascade, scale);
 	}

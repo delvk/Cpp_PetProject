@@ -12,8 +12,8 @@ int main(int argc, const char** argv)
 	// PreDefined trained XML classifiers with facial features 
 	cascade.load("D:/Work/My_Project/Cpp_PetProject/opencv/opencv_build/install/include/opencv2/data/haarcascades_cuda/haarcascade_frontalface_default.xml");
 	//path for folder contain images
-	string folder_path = "./images";
-	string name = "output/minhtri";
+	string folder_path = "images";
+	string name = "output/quocbao";
 	int idx = 0;
 	//CreateFolder
 	if (CreateDirectory(name.c_str(), NULL))
@@ -24,7 +24,6 @@ int main(int argc, const char** argv)
 	{
 		// Failed to create directory.
 		cout << "Can't create folder output " << name << endl;
-		return -1;
 	}
 
 	for (const auto & entry : filesystem::recursive_directory_iterator(folder_path)) {
@@ -63,7 +62,8 @@ void detectAndCrop(Mat& img, CascadeClassifier& cascade, double scale, string &n
 	vector<int> compression_params;
 	compression_params.push_back(100);
 	compression_params.push_back(9);
-	string filename = name + "/" + name + "." + to_string(idx) + ".jpg";
+	string filename = name + "." + to_string(idx) + ".jpg";
+	cout << filename << endl;
 	try {
 		imwrite(filename, img_crop, compression_params);
 	}
