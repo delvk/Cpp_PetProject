@@ -97,7 +97,7 @@ void testing() {
 
 int main(int argc, const char *argv[]) {
 	//Initial Variable for argument
-	string input_database_path = "database/faces94/female";
+	string input_database_path = "database/faces94/male";
 	string output_folder_path = "Data_Output";
 	// Check for valid command line arguments, print usage
 	// if no arguments were given.
