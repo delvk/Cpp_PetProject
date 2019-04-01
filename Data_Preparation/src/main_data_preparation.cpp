@@ -10,7 +10,7 @@ string train_folder = "Data_Training";
 string vali_folder = "Data_Validation";
 string test_folder = "Data_Testing";
 string output_folder = "Data_Output";
-string data_input_path = "database/faces94/female";
+string data_input_path = "database/faces94/male";
 void findAndReplaceAll(std::string & data, std::string toSearch, std::string replaceStr)
 {
 	// Get the first occurrence
