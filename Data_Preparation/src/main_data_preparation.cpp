@@ -74,13 +74,13 @@ void write_csv(const string &input, const string &output) {
 			s_path = filesystem::absolute(entry).string();
 			findAndReplaceAll(s_path, "\\", "/"); //chuan hoa path
 			if (train_idx < size_train) { //nho hon so phai training thi ghi vao file training
-				cout << "training: " << s_path << ";" << ";" << id << endl;
-				file_train << s_path << ";" << ";" << id << endl;
+				cout << "training: " << s_path << ";" << id << endl;
+				file_train << s_path << ";" << id << endl;
 
 			}
 			else { //nguoc lai thi ghi testing
-				cout << "testing: " << s_path << ";" << ";" << id << endl;
-				file_test << s_path << ";" <<  ";" << id << endl;
+				cout << "testing: " << s_path << ";" << id << endl;
+				file_test << s_path << ";" << id << endl;
 			}
 			train_idx++;
 		}

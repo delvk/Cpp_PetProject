@@ -71,7 +71,6 @@ static void read_csv(const string& filename, vector<Mat>& images, vector<int>& l
 	while (getline(file, line)) {
 		stringstream liness(line);
 		getline(liness, path, separator);
-		getline(liness, className, separator);
 		getline(liness, classlabel);
 		if (!path.empty() && !classlabel.empty()) {
 			//XU LI ANH MAU BGR SANG GRAY
