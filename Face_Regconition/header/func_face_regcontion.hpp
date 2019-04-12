@@ -76,7 +76,8 @@ static void read_csv(const string& filename, vector<Mat>& images, vector<int>& l
 			//XU LI ANH MAU BGR SANG GRAY
 			Mat gray;
 			cvtColor(imread(path,3), gray, COLOR_BGR2GRAY);
-			resize(gray, gray, Size(180, 200));
+			GaussianBlur(gray, gray, Size(11, 11), 2, 2, BORDER_REFLECT101);
+			//resize(gray, gray, Size(180, 200));
 			images.push_back(gray);
 			labels.push_back(atoi(classlabel.c_str()));
 		}

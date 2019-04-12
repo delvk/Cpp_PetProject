@@ -69,6 +69,8 @@ int main(int argc, const char** argv)
 	else {
 		string test_path = "Test/test1.jpg";
 		Mat gray=imread(test_path, 3);
+		Size size = Size(3, 3);
+		GaussianBlur(gray, gray, size, 1, 1, BORDER_REFLECT101);
 		detectAndDraw(gray, cascade, scale);
 	}
 
@@ -77,7 +79,7 @@ int main(int argc, const char** argv)
 
 void detectAndDraw(Mat& img, CascadeClassifier& cascade, double scale)
 {
-	vector<Rect> faces, faces2;
+	vector<Rect> faces;
 	Mat gray, smallImg;
 
 	cvtColor(img, gray, COLOR_BGR2GRAY); // Convert to Gray Scale 
